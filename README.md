@@ -1,20 +1,30 @@
-# http_stream
+# httpp
 
-[![Package Version](https://img.shields.io/hexpm/v/http_stream)](https://hex.pm/packages/http_stream)
-[![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/http_stream/)
+[![Package Version](https://img.shields.io/hexpm/v/httpp)](https://hex.pm/packages/httpp)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/httpp/)
 
 ```sh
-gleam add http_stream
+gleam add httpp
 ```
 ```gleam
-import http_stream
+import httpp/async
+import gleam/http/request
+import gleam/uri
+import gleam/bytes_builder
+import gleam/erlang/process
 
 pub fn main() {
-  // TODO: An example of the project in use
+  let response_subject = uri.parse("https://example.com")
+  |> request.from_uri
+  |> request.map(bytes_builder.from_string)
+  |> async.send
+
+  // asynchronously send an http request and receive it later
+  process.receive(response_subject, 2000)
 }
 ```
 
-Further documentation can be found at <https://hexdocs.pm/http_stream>.
+Further documentation can be found at <https://hexdocs.pm/httpp>.
 
 ## Development
 

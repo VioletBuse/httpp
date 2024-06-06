@@ -1,6 +1,6 @@
--module(http_stream_ffi)
+-module(httpp_ffi).
 
--export([send/5, insert_selector_handler/2])
+-export([send/5, insert_selector_handler/3]).
 
 send(Method, Url, Headers, Body, Options) ->
     case hackney:request(Method, Url, Headers, Body, Options) of
@@ -11,13 +11,13 @@ send(Method, Url, Headers, Body, Options) ->
             {ok, {client_ref_response, Status, ResponseHeaders, ClientRef}};
 
         {ok, Status, ResponseHeaders} ->
-            {ok, {response_without_body, Status, ResponseHeaders}};
+            {ok, {empty_response, Status, ResponseHeaders}};
 
         {ok, ClientRef} ->
-            {ok, {solo_client_ref_response, ClientRef}};
+            {ok, {async_response, ClientRef}};
 
         {error, {closed, PartialBody}} ->
-            {error, connection_closed}
+            {error, {connection_closed, PartialBody}};
 
         {error, Error} ->
             {error, {other, Error}}

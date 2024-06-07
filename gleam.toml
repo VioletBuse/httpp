@@ -1,12 +1,12 @@
 name = "httpp"
-version = "1.0.0"
+version = "1.0.1"
 
 # Fill out these fields if you intend to generate HTML documentation or publish
 # your project to the Hex package manager.
 #
 description = "an http client for gleam which supports streaming, based on hackney"
 licences = ["Apache-2.0"]
-repository = { type = "github", user = "JulianBuse", repo = "httpp" }
+repository = { type = "github", user = "VioletBuse", repo = "httpp" }
 links = [{ title = "Website", href = "https://gleam.run" }]
 #
 # For a full reference of all the available options, you can have a look at
